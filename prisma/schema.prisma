@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../prisma/user-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                BigInt         @id @default(autoincrement())
+  is_deleted        Boolean        @default(false)
+  name              String         @db.VarChar(255)
+  display_name      String         @db.VarChar(255)
+  profile           String?        @db.VarChar(255)
+  email             String         @unique @db.VarChar(255)
+  password          String         @db.VarChar(255)
+  phone             BigInt         @unique
+  role_id           Int            @db.SmallInt
+  current_address   String?        @db.VarChar(255)
+  permanent_address String?        @db.VarChar(255)
+  city              String?        @db.VarChar(255)
+  postcode          Int?           
+  country           Int            @db.SmallInt
+  state             Int?           @db.SmallInt
+  created_by        Int?
+  created_at        DateTime?      @default(now())
+  updated_by        Int?
+  updated_at        DateTime?
+  role              UserRole?      @relation(fields: [role_id], references: [id])
+  UserLoginLog      UserLoginLog[] @relation
+}
+
+model UserRole {
+  id          Int       @id @default(autoincrement())
+  is_deleted  Boolean   @default(false)
+  name        String    @unique @db.VarChar(255)
+  description String?   @db.VarChar(255)
+  created_by  Int?
+  created_at  DateTime  @default(now())
+  updated_by  Int?
+  updated_at  DateTime?
+  users       User[]    @relation
+}
+
+model UserLoginLog {
+  id          Int      @id @default(autoincrement())
+  is_deleted  Boolean  @default(false)
+  status      Int
+  user_id     BigInt
+  system_info Json     @db.JsonB
+  created_at  DateTime @default(now())
+  user        User?    @relation(fields: [user_id], references: [id])
+}
