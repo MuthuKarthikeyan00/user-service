@@ -1,3 +1,4 @@
+import Auth from '@src/controllers/Auth';
 import Role from '@src/controllers/Role';
 import User from '@src/controllers/User';
 import { Router ,Request, Response} from 'express';
@@ -12,7 +13,9 @@ export default class UserRouters {
         }
 
         this.router.post('/', User.validate, User.create);
-        this.router.put('/:id', User.validate, User.update);
+        this.router.put('/:id', Auth.jwtVerify, User.validate, User.update);
+
+        this.router.post('/login', Auth.validate, Auth.logIn);
 
         this.router.post('/role', Role.validate, Role.create);
         this.router.put('/role/:id', Role.validate, Role.update);

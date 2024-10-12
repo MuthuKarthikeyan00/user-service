@@ -12,7 +12,7 @@ CREATE TABLE "User" (
     "current_address" VARCHAR(255),
     "permanent_address" VARCHAR(255),
     "city" VARCHAR(255),
-    "postcode" SMALLINT,
+    "postcode" INTEGER,
     "country" SMALLINT NOT NULL,
     "state" SMALLINT,
     "created_by" INTEGER,

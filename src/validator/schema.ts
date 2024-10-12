@@ -22,21 +22,10 @@ export const userTypeValidationSchema = z.object({
   description: z.string().nullable().optional(),
 });
 
-export const categoryValidationSchema = z.object({
-  name: z.string(),
-  parent_id: z.number().int().positive().nullable().optional(),
-  description: z.string().nullable().optional(),
+export const logInValidationSchema = z.object({
+  password: z.string().min(4).max(255),
+  email: z.string().email().max(255),  
 });
 
-export const productTypeValidationSchema = z.object({
-  name: z.string(),
-  description: z.string().nullable().optional(),
-});
-
-export const unitOfMeasurementValidationSchema = z.object({
-  name: z.string(),
-  code: z.string().nullable().optional(),
-  description: z.string().nullable().optional(),
-});
 
 

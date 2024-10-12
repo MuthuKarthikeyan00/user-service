@@ -8,7 +8,7 @@ export default class Utils {
     }
 
     public static  isNumber(param : any) : boolean {
-        return typeof param === 'number'
+        return typeof param === 'number' || typeof param === 'bigint'
     }
 
     public static  isBoolean(param : any) : boolean {
@@ -36,7 +36,7 @@ export default class Utils {
     }
 
     public static  isGraterthenZero(param : any) : boolean {
-        return   this.isNumber(param) && param > 0;
+        return   this.isNumber(param) && Number(param) > 0;
     }
 
     public static  isValid(param : any) : boolean {
@@ -65,6 +65,6 @@ export default class Utils {
 
     public static convertTONumber(param : any) : | number {
         param = this.isNumber(param) ? param : Number(param) ;  
-        return this.isNumber(param) ? param : 0 ;  
+        return this.isNumber(param) ? Number(param) : 0 ;  
     }
 }

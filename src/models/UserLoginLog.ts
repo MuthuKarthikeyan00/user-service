@@ -3,20 +3,20 @@ import { NonZeroPositiveNumber } from '@src/types/types';
 
 const prisma = new PrismaClient();
 
-type CreateInputParams = Prisma.UserCreateInput;
+type CreateInputParams = Prisma.UserLoginLogCreateInput;
 
 
-export default class User{
+export default class UserLoginLog{
 
     public static async create(params : CreateInputParams) {
-        return await prisma.user.create({
+        return await prisma.userLoginLog.create({
             data: params
         })
     }
 
     public static async update(id:number,params : CreateInputParams) {
 
-        return await prisma.user.update({
+        return await prisma.userLoginLog.update({
             where: {
                 id,
               },
@@ -27,20 +27,13 @@ export default class User{
 
     public static async get<T extends number>(id : NonZeroPositiveNumber<T> ) {
 
-        return await prisma.user.findUnique({
+        return await prisma.userLoginLog.findUnique({
             where: { id }
-          });
-    }
-
-    public static async getByEmail(email : string ) {
-
-        return await prisma.user.findUnique({
-            where: { email  }
           });
     }
     
     public static async isValid<T extends number>(id : NonZeroPositiveNumber<T> ) : Promise<boolean>{
-        const product = await User.get(id);
+        const product = await UserLoginLog.get(id);
         return !!product?.id
     }   
 

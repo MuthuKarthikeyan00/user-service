@@ -4,12 +4,12 @@ import Sanitizer from "@src/helpers/Sanitizer";
 import Utils from "@src/helpers/Utils";
 import Validator from "@src/validator/Validator";
 import { NextFunction, Request, Response } from "express";
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '../../prisma/user-client';
 import { userTypeValidationSchema } from "@src/validator/schema";
 import UserRoleModel from "@src/models/UserRole";
-import { error } from "console";
 
-const prisma = new PrismaClient();
+
+
 type CreateInputParams = Prisma.UserRoleCreateInput;
 
 

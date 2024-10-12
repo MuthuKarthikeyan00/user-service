@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient, Prisma } from '../../prisma/user-client';
 import { NonZeroPositiveNumber } from '@src/types/types';
 
 const prisma = new PrismaClient();
