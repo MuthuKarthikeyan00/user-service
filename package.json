@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --watch src --exec ts-node -r tsconfig-paths/register server.ts",
+    "start": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/server.ts",
     "build": "tsc",
     "serve": "node dist/server.ts"
   },

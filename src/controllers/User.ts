@@ -19,6 +19,7 @@ export default class User {
 
         return Sanitizer.sanitizeHtml({
             name: String(body.name),
+            user_code: String(body.user_code),
             display_name: String(body.display_name),
             profile: String(body.profile),
             email: String(body.email),
@@ -26,8 +27,10 @@ export default class User {
             permanent_address: String(body.permanent_address),
             current_address: String(body.current_address),
             city: String(body.city),
-            phone:  Utils.convertTONumber(body.phone),
+            phone:  String(body.phone),
             role_id:  Utils.convertTONumber(body.role_id),
+            company_branch_id:  1,
+            company_id:  7777777,
             postcode:  Utils.convertTONumber(body.postcode),
             country:  Utils.convertTONumber(body.country),
             state:  Utils.convertTONumber(body.state),
@@ -44,7 +47,7 @@ export default class User {
             params.password = await Encryption.hashPassword(params.password , params.email);
 
             const data = await UserModel.create(params);
-            if (Utils.isGraterthenZero(data.id)) return ResponseHandler.success(res, Constants.HTTP_STATUS_CODE_CREATED);
+            if (Utils.isGraterthenZero(data.id)) return ResponseHandler.success(res, Constants.HTTP_STATUS_CODE_CREATED, data);
             return ResponseHandler.error(res);
 
         } catch (error) {
@@ -55,26 +58,27 @@ export default class User {
 
     public static async update(req: Request, res: Response) {
         try {
-            const body = req.body;
-            const id = Number(req.params.id);
         
-            if (!Utils.isGraterthenZero(id)) {
-                return ResponseHandler.error(
-                    res,{},
-                    Constants.HTTP_STATUS_CODE_NOT_FOUND,
-                    "invalid id"
-                );
-            }
+            // const body = req.body;
+            // const id = Number(req.params.id);
+        
+            // if (!Utils.isGraterthenZero(id)) {
+            //     return ResponseHandler.error(
+            //         res,{},
+            //         Constants.HTTP_STATUS_CODE_NOT_FOUND,
+            //         "invalid id"
+            //     );
+            // }
 
-            const params = await User.handleData(body);
-            params.updated_at = new Date().toISOString();
-            params.updated_by = 1
-            params.password = await Encryption.hashPassword(params.password , params.email);
+            // const params = await User.handleData(body);
+            // params.updated_at = new Date().toISOString();
+            // params.updated_by = req.user.id
+            // params.password = await Encryption.hashPassword(params.password , params.email);
 
-            const data = await UserModel.update(id, params);
-            if (data.id > 0) return ResponseHandler.success(res, Constants.HTTP_STATUS_CODE_OK, data, 'User updated');
+            // const data = await UserModel.update(id, params);
+            // if (data.id > 0) return ResponseHandler.success(res, Constants.HTTP_STATUS_CODE_OK, data, 'User updated');
 
-            return ResponseHandler.error(res);
+            // return ResponseHandler.error(res);
         } catch (error) {
             return ResponseHandler.error(res,error);
         }

@@ -125,8 +125,11 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   is_deleted: 'is_deleted',
+  user_code: 'user_code',
   name: 'name',
   display_name: 'display_name',
+  company_id: 'company_id',
+  company_branch_id: 'company_branch_id',
   profile: 'profile',
   email: 'email',
   password: 'password',
@@ -159,9 +162,37 @@ exports.Prisma.UserLoginLogScalarFieldEnum = {
   id: 'id',
   is_deleted: 'is_deleted',
   status: 'status',
+  mac_address: 'mac_address',
   user_id: 'user_id',
   system_info: 'system_info',
   created_at: 'created_at'
+};
+
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  is_deleted: 'is_deleted',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  system_info: 'system_info',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.CompanyBranchScalarFieldEnum = {
+  id: 'id',
+  is_deleted: 'is_deleted',
+  company_id: 'company_id',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  system_info: 'system_info',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -193,7 +224,9 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.ModelName = {
   User: 'User',
   UserRole: 'UserRole',
-  UserLoginLog: 'UserLoginLog'
+  UserLoginLog: 'UserLoginLog',
+  Company: 'Company',
+  CompanyBranch: 'CompanyBranch'
 };
 
 /**

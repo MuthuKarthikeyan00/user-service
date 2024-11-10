@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 type CreateInputParams = Prisma.UserLoginLogCreateInput;
 
 
+
 export default class UserLoginLog{
 
     public static async create(params : CreateInputParams) {
@@ -25,16 +26,18 @@ export default class UserLoginLog{
 
     }
 
-    public static async get<T extends number>(id : NonZeroPositiveNumber<T> ) {
 
-        return await prisma.userLoginLog.findUnique({
-            where: { id }
-          });
-    }
     
-    public static async isValid<T extends number>(id : NonZeroPositiveNumber<T> ) : Promise<boolean>{
-        const product = await UserLoginLog.get(id);
-        return !!product?.id
+    public static async getByUserId(user_id : number ) {
+        return await prisma.userLoginLog.findFirst({
+            where: {
+                user_id,
+            },
+            orderBy : {
+                created_at : 'desc'
+            }
+          });
     }   
+
 
 }

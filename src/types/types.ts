@@ -1,6 +1,13 @@
 
 export type NonZeroPositiveNumber<T extends number> = `${T}` extends `-${string}` | '0' ? never : T;
 
+export type UserSessionType  = {
+    user_id: number,
+    role_id?: number,
+    company_id?: number,
+    company_branch_id?: number
+  }
+
 
 export  type productParams =  {
     name: String,
